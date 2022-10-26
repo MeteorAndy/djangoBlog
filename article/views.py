@@ -13,21 +13,22 @@ from django.core.paginator import Paginator
 
 
 def article_list(request):
-    # # 取出所有博客文章
-    # articles = Article.objects.all()
-    # 修改变量名称（articles -> article_list）
-    article_list = Article.objects.all()
+    # 根据GET请求中查询条件
+    # 返回不同排序的对象数组
+    if request.GET.get('order') == 'total_views':
+        article_list = Article.objects.all().order_by('-total_views')
+        order = 'total_views'
+    else:
+        article_list = Article.objects.all().order_by('created')
+        order = 'created'
 
-    # 每页显示 1 篇文章
-    paginator = Paginator(article_list, 5)
-    # 获取 url 中的页码
+    paginator = Paginator(article_list, 2)
     page = request.GET.get('page')
-    # 将导航对象相应的页码内容返回给 articles
     articles = paginator.get_page(page)
 
-    # 需要传递给模板（templates）的对象
-    context = {'articles': articles}
-    # render函数：载入模板，并返回context对象
+    # 修改此行
+    context = {'articles': articles, 'order': order}
+
     return render(request, 'article/list.html', context)
 
 
@@ -35,6 +36,9 @@ def article_list(request):
 def article_detail(request, id):
     # 取出相应的文章
     article = Article.objects.get(id=id)
+    # 浏览量 +1
+    article.total_views += 1
+    article.save(update_fields=['total_views'])
     # 取出文章评论
     comments = Comment.objects.filter(article=id)
     # 需要传递给模板的对象
