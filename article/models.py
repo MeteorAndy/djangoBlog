@@ -9,13 +9,15 @@ from django.utils import timezone
 class Article(models.Model):
     # 文章id,主键
     id = models.AutoField(primary_key=True)
-    # 文章作者 ,用于指定数据删除的方式
-    author = models.CharField(max_length=100)
+
+    # 文章作者。修改为User的外键，参数 on_delete 用于指定数据删除的方式
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
     # 文章标题,models.CharField 为字符串字段，用于保存较短的字符串，比如标题
-    title = models.CharField(max_length=100)
+    title = models.CharField('标题', max_length=100)
 
     # 文章正文,保存大量文本使用 TextField
-    body = models.TextField()
+    body = models.TextField('文章正文')
 
     # 文章创建时间,参数 default=timezone.now 指定其在创建数据时将默认写入当前的时间
     created = models.DateTimeField(default=timezone.now)
