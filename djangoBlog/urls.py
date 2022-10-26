@@ -20,6 +20,8 @@ from article import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('article/', views.article_list, name='list'),
-    path('article-detail/<int:id>/', views.article_detail, name='detail'),
+    path('list/', views.article_list, name='list'),  # 展示文章
+    path('detail/<int:id>/', views.article_detail, name='detail'),  # 文章详情
+    # 增加写文章
+    path('create/', views.article_create, name='create'),
 ]
