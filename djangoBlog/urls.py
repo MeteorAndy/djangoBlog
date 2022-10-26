@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 import article.views
+import comment.views
 import userprofile.views
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     path('update/<int:id>/', article.views.article_update, name='update'),  # 更新文章
     path('login/', userprofile.views.user_login, name='login'),
     path('logout/', userprofile.views.user_logout, name='logout'),
-    # 增加注册管理
     path('register/', userprofile.views.user_register, name='register'),
+    # 增加评论管理
+    path('post-comment/<int:article_id>/', comment.views.post_comment, name='post_comment'),
 ]
