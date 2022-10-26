@@ -16,15 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from article import views
+import article.views
+import userprofile.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^$', views.article_list),
-    path('list/', views.article_list, name='list'),  # 展示文章
-    path('detail/<int:id>/', views.article_detail, name='detail'),  # 文章详情
-    path('create/', views.article_create, name='create'),  # 写文章
-    path('delete/<int:id>/', views.article_delete, name='delete'),  # 删除文章
-    # 增加更新文章
-    path('update/<int:id>/', views.article_update, name='update'),
+    re_path(r'^$', article.views.article_list),
+    path('list/', article.views.article_list, name='list'),  # 展示文章
+    path('detail/<int:id>/', article.views.article_detail, name='detail'),  # 文章详情
+    path('create/', article.views.article_create, name='create'),  # 写文章
+    path('delete/<int:id>/', article.views.article_delete, name='delete'),  # 删除文章
+    path('update/<int:id>/', article.views.article_update, name='update'),  # 更新文章
+    # 增加用户管理
+    path('login/', userprofile.views.user_login, name='login'),
+    path('logout/', userprofile.views.user_logout, name='logout'),
 ]
