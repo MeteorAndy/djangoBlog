@@ -15,10 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from article import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # 添加此项
-    path('article/', views.article_list),  # 展示文章
 ]
