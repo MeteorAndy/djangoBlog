@@ -27,7 +27,8 @@ urlpatterns = [
     path('create/', article.views.article_create, name='create'),  # 写文章
     path('delete/<int:id>/', article.views.article_delete, name='delete'),  # 删除文章
     path('update/<int:id>/', article.views.article_update, name='update'),  # 更新文章
-    # 增加用户管理
     path('login/', userprofile.views.user_login, name='login'),
     path('logout/', userprofile.views.user_logout, name='logout'),
+    # 增加注册管理
+    path('register/', userprofile.views.user_register, name='register'),
 ]
