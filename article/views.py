@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import HttpResponse
 # 引入redirect用于重定向地址
 from django.shortcuts import render, redirect
@@ -36,7 +37,7 @@ def article_list(request):
         if order == 'total_views':
             article_list = Article.objects.all().order_by('-total_views')
         else:
-            article_list = Article.objects.all()
+            article_list = Article.objects.all().order_by('-created')
 
     paginator = Paginator(article_list, 2)
     page = request.GET.get('page')
