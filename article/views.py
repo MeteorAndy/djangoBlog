@@ -13,6 +13,7 @@ from .models import Article
 from django.core.paginator import Paginator
 
 
+# 王禧龙
 def article_list(request):
     # 根据GET请求中查询条件
     # 返回不同排序的对象数组
@@ -39,7 +40,7 @@ def article_list(request):
         else:
             article_list = Article.objects.all().order_by('-created')
 
-    paginator = Paginator(article_list, 2)
+    paginator = Paginator(article_list, 10)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
 
@@ -48,7 +49,7 @@ def article_list(request):
 
     return render(request, 'article/list.html', context)
 
-
+# 王禧龙
 # 文章详情
 def article_detail(request, id):
     # 取出相应的文章
@@ -63,7 +64,7 @@ def article_detail(request, id):
     # 载入模板，并返回context对象
     return render(request, 'article/detail.html', context)
 
-
+# 王禧龙
 # 写文章的视图
 def article_create(request):
     # 判断用户是否提交数据
@@ -92,7 +93,7 @@ def article_create(request):
         # 返回模板
         return render(request, 'article/create.html', context)
 
-
+# 王禧龙
 # 删文章
 def article_delete(request, id):
     print(request.method)
@@ -105,7 +106,7 @@ def article_delete(request, id):
     else:
         return HttpResponse("仅允许post请求")
 
-
+# 王禧龙
 # 更新文章
 def article_update(request, id):
     """

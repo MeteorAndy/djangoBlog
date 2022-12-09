@@ -1,35 +1,57 @@
+{% load static %}
+{#王禧龙#}
 <!-- 定义导航栏 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <!-- 导航栏商标 -->
-        <a class="navbar-brand" href="#">我的博客</a>
-        <!-- 导航入口 -->
-        <div>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <!-- 改写了这里的 href -->
-                    <a class="nav-link" href="{% url 'list' %}">首页</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create' %}">创作</a>
-                </li>
-                <!-- Django的 if 模板语句 -->
-                {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-expanded="false">{{ user.username }}</a>
-                        <ul class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'logout' %}">退出登录</a>
-                        </ul>
-                    </li>
-                    <!-- 如果用户未登录，则显示 “登录” -->
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">登录</a>
-                    </li>
-                    <!-- if 语句在这里结束 -->
-                {% endif %}
-            </ul>
+<header>
+    <div class="header-inner" style="height:100vh">
+        <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <div class="container"><a class="navbar-brand" href="{% url 'list' %}"><strong>流星胖胖的小角落</strong>
+            </a>
+                <button
+                        id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="animated-icon"><span></span><span></span><span></span></div>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto text-center">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'list' %}"><i
+                                class="iconfont icon-home-fill"></i>
+                            首页</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'create' %}"><i
+                                class="iconfont icon-pen"></i>创作</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                   aria-expanded="false">{{ user.username }}</a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'logout' %}">退出登录</a>
+                                </ul>
+                            </li>
+                            <!-- 如果用户未登录，则显示 “登录” -->
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">登录</a>
+                            </li>
+                            <!-- if 语句在这里结束 -->
+                        {% endif %}
+                        <li class="nav-item" id="color-toggle-btn"><a class="nav-link" target="_self"
+                                                                      href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                                class="iconfont icon-dark"
+                                id="color-toggle-icon"></i>&nbsp;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="banner" class="banner" parallax="true"
+             style="background:url({% static 'img/bg/fastfood.png' %}) no-repeat center center;background-size:cover">
+            <div class="full-bg-img">
+                <div class="mask flex-center" style="background-color:rgba(0,0,0,.3)">
+                    <div class="banner-text text-center fade-in-up">
+                        <div class="h2"><span id="subtitle" data-typed-text="一个整天不务正业的预备役码农"></span></div>
+                    </div>
+                    <div class="scroll-down-bar"><i class="iconfont icon-arrowdown"></i></div>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+</header>

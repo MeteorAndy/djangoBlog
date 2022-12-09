@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from article.models import Article
 from .forms import CommentForm
 
-
+# 谢明月
 # 文章评论
 @login_required(login_url='/login/')
 def post_comment(request, article_id):

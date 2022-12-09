@@ -6,6 +6,7 @@ from .forms import UserLoginForm, UserRegisterForm
 
 # Create your views here.
 
+# 朱小慧
 def user_login(request):
     if request.method == 'POST':
         user_login_form = UserLoginForm(data=request.POST)
@@ -30,13 +31,13 @@ def user_login(request):
     else:
         return HttpResponse("请使用GET或POST请求数据")
 
-
+# 田振
 # 用户退出
 def user_logout(request):
     logout(request)
     return redirect("list")
 
-
+# 田振
 # 用户注册
 def user_register(request):
     if request.method == 'POST':

@@ -5,7 +5,7 @@ from django.urls import reverse
 # timezone 用于处理时间相关事务。
 from django.utils import timezone
 
-
+# 李文杰
 # 博客文章数据模型
 class Article(models.Model):
     # 文章id,主键

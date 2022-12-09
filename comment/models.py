@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from article.models import Article
 
-
+# 谢明月
 # 博文的评论
 class Comment(models.Model):
     article = models.ForeignKey(Article,

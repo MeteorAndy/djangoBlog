@@ -2,13 +2,13 @@
 from django import forms
 from django.contrib.auth.models import User
 
-
+# 朱小慧
 # 登录表单，继承了 forms.Form 类
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
 
-
+# 田振
 # 注册用户表单
 class UserRegisterForm(forms.ModelForm):
     # 复写 User 的密码

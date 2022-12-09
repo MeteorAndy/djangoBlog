@@ -3,7 +3,7 @@ from django import forms
 # 引入文章模型
 from .models import Article
 
-
+# 李文杰
 # 写文章的表单类
 class ArticleForm(forms.ModelForm):
     class Meta:

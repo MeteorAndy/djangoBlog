@@ -1,3 +1,4 @@
+{#王禧龙0#}
 <!--    载入静态文件-->
 {% load static %}
 
@@ -5,14 +6,62 @@
 <!-- 网站主语言 -->
 <html lang="zh-cn">
 <head>
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/logo/guoba.png' %}">
+    <link rel="icon" href="{% static 'img/logo/guoba.png' %}">
     <!-- 网站采用的字符编码 -->
     <meta charset="utf-8">
     <!-- 预留网站标题的位置 -->
     <title>{% block title %}{% endblock %}</title>
-    <!-- 引入bootstrap的css文件  -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <!-- 引入图标库 -->
-    <link rel="stylesheet" href="{% static 'icons/bootstrap-icons.css' %}">
+    <!-- 网站的静态资源 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link id="highlight-css" rel="stylesheet" href="{% static 'css/highlight.css' %}">
+    <link id="highlight-css-dark" rel="stylesheet" href="{% static 'css/highlight-dark.css' %}">
+    <script
+            id="fluid-configs">var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx);
+    var CONFIG = {
+        hostname: "meteorandy.netlify.app",
+        root: "/",
+        version: "1.9.3",
+        typing: {enable: !0, typeSpeed: 70, cursorChar: "_", loop: !0, scope: []},
+        anchorjs: {enable: !0, element: "h1,h2,h3,h4,h5,h6", placement: "right", visible: "hover", icon: ""},
+        progressbar: {enable: !0, height_px: 3, color: "#A90113", options: {showSpinner: !1, trickleSpeed: 100}},
+        code_language: {enable: !0, default: "TEXT"},
+        copy_btn: !0,
+        image_caption: {enable: !0},
+        image_zoom: {enable: !0, img_url_replace: ["", ""]},
+        toc: {enable: !0, placement: "right", headingSelector: "h1,h2,h3,h4,h5,h6", collapseDepth: 0},
+        lazyload: {enable: !0, loading_img: "/img/loading.gif", onlypost: !1, offset_factor: 2},
+        web_analytics: {
+            enable: !0,
+            follow_dnt: !0,
+            baidu: null,
+            google: null,
+            gtag: null,
+            tencent: {sid: null, cid: null},
+            woyaola: null,
+            cnzz: null,
+            leancloud: {
+                app_id: "DpHUGCpJskfsvul9py9gnP22-9Nh9j0Va",
+                app_key: "lIWlKO4kQ2PL8vpNLiY2uFNy",
+                server_url: "https://dphugcpj.lc-cn-e1-shared.com",
+                path: "window.location.pathname",
+                ignore_local: !1
+            }
+        },
+        search_path: "/local-search.xml"
+    };
+    if (CONFIG.web_analytics.follow_dnt) {
+        var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+        Fluid.ctx.dnt = dntVal && (dntVal.startsWith("1") || dntVal.startsWith("yes") || dntVal.startsWith("on"))
+    }</script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/color-schema.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 </head>
 
 <body>
@@ -20,14 +69,33 @@
 {% include 'header.html' %}
 <!-- 预留具体页面的位置 -->
 {% block content %}{% endblock content %}
-<!-- 引入注脚 -->
+<!-- 引入页脚 -->
 {% include 'footer.html' %}
-<!-- bootstrap.js 依赖popper.js，因此在这里引入 -->
-<!-- popper.js 引入-->
-<script src="{% static 'js/popper.min.js' %}"></script>
-
-<!-- 引入bootstrap的js文件 -->
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- 网站的静态资源 -->
+<script src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css">
+<script>NProgress.configure({
+    showSpinner: !1,
+    trickleSpeed: 100
+}), NProgress.start(), window.addEventListener("load", (function () {
+    NProgress.done()
+}))</script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js"></script>
+<script src="{% static 'js/events.js' %}"></script>
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js"></script>
+<script>!function (t, e) {
+    var i = Fluid.plugins.typing, n = e.getElementById("subtitle");
+    n && i && i(n.getAttribute("data-typed-text"))
+}(window, document)</script>
+<script src="{% static 'js/img-lazyload.js' %}"></script>
+<script defer src="{% static 'js/leancloud.js' %}"></script>
+<script src="{% static 'js/local-search.js' %}"></script>
+<script src="{% static 'js/boot.js' %}"></script>
+<noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
 </body>
 
 </html>

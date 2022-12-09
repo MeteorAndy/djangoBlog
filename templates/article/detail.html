@@ -1,3 +1,4 @@
+{#李文杰#}
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load static %}
@@ -9,21 +10,13 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
-
-    <!-- 文章详情 -->
-    <div class="container">
-        <!--    <div class="row">-->
-        <!-- 标题及作者 -->
-        <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-        <div class="col-12 alert alert-primary">
-            <div class="col-12">
-                <a>作者：{{ article.author }}</a>
-                &nbsp
-                <a>{{ article.created|date:'Y-m-d H:i:s' }}</a>
-                &nbsp
-                <!-- 只有作者可以修改文章 -->
+    <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+            <article class="post-content mx-auto">
+                <h1>{{ article.title }}</h1>
+                <hr>
                 {% if user == article.author %}
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">删除文章</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#myModal" id="delete-btn">删除文章</a>
                     <!-- 新增一个隐藏的表单 -->
                     <form
                             style="display:none;"
@@ -37,105 +30,66 @@
                     &nbsp
                     <a href="{% url "update" article.id %}">编辑文章</a>
                 {% endif %}
-                <!-- 增加阅读量和图标 -->
-                <small class="col align-self-end" style="color: gray;">
-                            <span class="bi bi-eye">
+                &nbsp
+                <small>
+                <span class="iconfont icon-users">
                             {{ article.total_views }}
                             </span>
                 </small>
-            </div>
-        </div>
-        <!-- 文章正文 -->
-        <div class="col-12">
-            <p>{{ article.body }}</p>
-        </div>
-        <!--    </div>-->
-        <div class="container">
-            <div class="col-12">
-                <!-- 发表评论 -->
                 <hr>
-                {% if user.is_authenticated %}
-                    <div>
-                        <form
-                                action="{% url "post_comment" article.id %}"
-                                method="POST"
-                        >
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="body">
-                                    <strong>
-                                        我也要发言：
-                                    </strong>
-                                </label>
-                                <textarea
-                                        type="text"
-                                        class="form-control"
-                                        id="body"
-                                        name="body"
-                                        rows="2"></textarea>
+                <div class="markdown-body">
+                    <p>{{ article.body }}</p>
+                </div>
+                <hr>
+                <div>
+                    <div class="license-box my-3">
+                        <div class="license-title">
+                            <div>{{ article.title }}</div>
+                        </div>
+                        <div class="license-meta">
+                            <div class="license-meta-item">
+                                <div>作者</div>
+                                <div>{{ article.author }}</div>
                             </div>
-                            <br>
-                            <!-- 提交按钮 -->
-                            <button type="submit" class="btn btn-primary ">发送</button>
-                        </form>
+                            <div class="license-meta-item license-meta-date">
+                                <div>发布于</div>
+                                <div>{{ article.created }}</div>
+                            </div>
+                            <div class="license-meta-item">
+                                <div>许可协议</div>
+                                <div><a target="_blank"
+                                        href="https://creativecommons.org/licenses/by/4.0/"><span
+                                        class="hint--top hint--rounded" aria-label="BY - 署名"><i
+                                        class="iconfont icon-by"></i></span></a></div>
+                            </div>
+                        </div>
+                        <div class="license-icon iconfont"></div>
                     </div>
-                    <br>
-                {% else %}
-                    <br>
-                    <h5 class="col-12 ">
-                        请<a href="{% url 'login' %}">登录</a>后回复
-                    </h5>
-                    </h5>
-                    <br>
-                {% endif %}
-            </div>
-        </div>
-        <!-- 显示评论 -->
-        <h4>共有{{ comments.count }}条评论</h4>
-        <div>
-            {% for comment in comments %}
-                <hr>
-                <p>
-                    <strong style="color: pink">
-                        {{ comment.user }}
-                    </strong> 于
-                    <span style="color: green">
+                </div>
+                <h4>共有{{ comments.count }}条评论</h4>
+                <div>
+                    {% for comment in comments %}
+                        <hr>
+                        <p>
+                            <strong style="color: pink">
+                                {{ comment.user }}
+                            </strong> 于
+                            <span style="color: green">
                     {{ comment.created|date:"Y-m-d H:i:s" }}
                 </span> 时说：
-                </p>
-                <pre style="font-family: inherit; font-size: 1em;">
-                {{ comment.body }}</pre>
-            {% endfor %}
-        </div>
-    </div>
-    </div>
-    <!-- 模态框 -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <!-- 模态框头部 -->
-                <div class="modal-header">
-                    <h4 class="modal-title">确认删除</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </p>
+                        <div class="markdown-body" style="font-family: inherit; font-size: 1em;">
+                            {{ comment.body }}</div>
+                    {% endfor %}
                 </div>
-                <!-- 模态框主体 -->
-                <div class="modal-body">
-                    确认删除文章？
-                </div>
-                <!-- 模态框底部 -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="confirm_delete()">
-                        确定
-                    </button>
-                </div>
-            </div>
+            </article>
         </div>
     </div>
     <script>
-        // 删除文章的函数
-        function confirm_delete() {
-            document.getElementById("safe_delete").submit();
+        document.getElementById("delete-btn").onclick = function () {
+            if (confirm("确认删除文章？")) {
+                document.getElementById("safe_delete").submit();
+            }
         }
     </script>
 {% endblock content %}
